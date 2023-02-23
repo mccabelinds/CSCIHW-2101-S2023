@@ -16,6 +16,15 @@ Hint3: The print statement is System.out.println();
 */
 public class Pyramid {
     public static void Output() {
-        
+        System.out.println("#");
+        System.out.println("##");
+        System.out.println("###");
+        System.out.println("####");
+        System.out.println("#####");
+        System.out.println("####");
+        System.out.println("###");
+        System.out.println("##");
+        System.out.println("#");
+
     }
 }
