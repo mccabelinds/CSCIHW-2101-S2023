@@ -8,9 +8,11 @@ package HW1;
 // HELLO
 // 01234
 public class Replace {
-    public String charReplace(String s, int x, char z) {
-        return null;
-        
+    public static String charReplace(String s, int x, char z) {
+       char[] charArray = s.toCharArray();
+         charArray[x] = z;
+         return new String(charArray);
     }
+
     
 }
