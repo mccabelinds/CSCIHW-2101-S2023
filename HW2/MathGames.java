@@ -11,6 +11,10 @@ public class MathGames {
     // Bonus points: Try to make it accept any 2 sides and return the 3rd. So it can take in
     // Hypotenuse and Perpendicular and return the base.
     // Example 1: pythagorean(3,4) would return 5
+    public static double calculateMissingSide(double side1, double side2){
+        double hypotenuse = Math.sqrt(Math.pow(side1, 2) + Math.pow(side2, 2));
+        return hypotenuse;
+    }
 
 
 
@@ -53,8 +57,3 @@ public class MathGames {
         double hypotenuse = Math.sqrt(Math.pow(side1, 2) + Math.pow(side2, 2));
         System.out.println("The hypotenuse is: " + hypotenuse);
     }
-    public static double calculateMissingSide(double side1, double side2){
-        double hypotenuse = Math.sqrt(Math.pow(side1, 2) + Math.pow(side2, 2));
-        return hypotenuse;
-    }
-}
