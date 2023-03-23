@@ -31,7 +31,20 @@ public class MathGames {
         // Hint 2: You will probably need to cast the double to an int
         // Hint 3: You will probably need to use the Math.ceil() method
         // Example: grade(69.3) would return a D
-
+    public static String calculateGrade(double grade){
+        int roundedGrade = (int) Math.ceil(grade);
+        if (roundedGrade >= 90 && roundedGrade <= 100){
+            return "A";
+        } else if (roundedGrade >= 80 && roundedGrade <= 89){
+            return "B";
+        } else if (roundedGrade >= 70 && roundedGrade <= 79){
+            return "C";
+        } else if (roundedGrade >= 60 && roundedGrade <= 69){
+            return "D";
+        } else {
+            return "F";
+        }
+    }
 
 
 
@@ -45,7 +58,15 @@ public class MathGames {
     //      Hint 3: It is possible you might need to Cast a double to an int or vice versa
     //      Hint 4: You will probably need to use the Math.ceil() method
     //      Example: tip(100, 4, 18) would return 5.0
-
+    public static double calculateTipPerPerson(double totalBill, int numOfPeople, double tipPercentage) {
+        double totalTip = (totalBill * tipPercentage / 100);
+        double totalBillWithTip = totalBill + totalTip;
+        double tipPerPerson = totalTip / numOfPeople;
+        tipPerPerson = Math.ceil(tipPerPerson); // round up to the next whole number
+        return tipPerPerson;
+    }
+    
+    
     
  
 
@@ -56,5 +77,15 @@ public class MathGames {
         double side2 = 4;
         double hypotenuse = Math.sqrt(Math.pow(side1, 2) + Math.pow(side2, 2));
         System.out.println("The hypotenuse is: " + hypotenuse);
+
+        double myGrade = 86.4;
+        String gradeLetter = calculateGrade(myGrade);
+        System.out.println("My grade is: " + gradeLetter);
+
+        double totalBill = 100;
+        int numOfPeople = 4;
+        double tipPercentage = 18;
+        double tipPerPerson = calculateTipPerPerson(totalBill, numOfPeople, tipPercentage);
+        System.out.println("Tip per person: $" + tipPerPerson);
     }
 }
