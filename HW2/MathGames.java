@@ -60,7 +60,6 @@ public class MathGames {
     //      Example: tip(100, 4, 18) would return 5.0
     public static double calculateTipPerPerson(double totalBill, int numOfPeople, double tipPercentage) {
         double totalTip = (totalBill * tipPercentage / 100);
-        double totalBillWithTip = totalBill + totalTip;
         double tipPerPerson = totalTip / numOfPeople;
         tipPerPerson = Math.ceil(tipPerPerson); // round up to the next whole number
         return tipPerPerson;
