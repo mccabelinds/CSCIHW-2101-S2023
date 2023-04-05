@@ -41,5 +41,25 @@ public class BankAccountTester {
         BankAccount.interact(yourAccount);
         // BankAccount.interact(myAccount);
 
+        BankAccount.overDraft(yourAccount, 500);
+
+        System.out.println("Before transfer:");
+        System.out.println(myAccount.name + "'s account balance: $" + myAccount.getbalance());
+        System.out.println(yourAccount.name + "'s account balance: $" + yourAccount.getbalance());
+
+        BankAccount.transferMoney(myAccount, yourAccount, 100);
+
+        double principal = 1000;
+        double rate = 5;
+        double time = 2;
+        double interest = simpleInterest(principal, rate, time);
+        System.out.println("Simple interest: $" + interest);
+
+        
     }
+
+    private static double simpleInterest(double principal, double rate, double time) {
+        return 0;
+    }
+
 }

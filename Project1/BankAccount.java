@@ -46,6 +46,39 @@ public class BankAccount {
         this.balance = balance;
         this.accountNumber = accountNumber;
         this.dob = dob;
+        if (balance >= 10000) {
+            System.out.println("Congratulations! You qualify for a savings account.");
+            System.out.println("Would you like to open a savings account? (Y/N)");
+            try (Scanner sc = new Scanner(System.in)) {
+                String response = sc.nextLine();
+                if (response.equals("Y") || response.equals("y")) {
+                    System.out.println("Please enter the initial balance for your savings account:");
+                    double savingsBalance = sc.nextDouble();
+                    System.out.println("Please choose an interest type for your savings account:");
+                    System.out.println("1. Simple interest");
+                    System.out.println("2. Compounded interest");
+                    int interestType = sc.nextInt();
+                    if (interestType == 1) {
+                        System.out.println("Please enter the annual interest rate for your savings account (APY):");
+                        double savingsInterest = 0.0;
+                        System.out.println("Your savings account has earned $" + savingsInterest + " in interest.");
+                        balance += savingsBalance + savingsInterest;
+                    } else if (interestType == 2) {
+                        System.out.println("Please enter the annual interest rate for your savings account (APY):");
+                        double apy = 0.0001;
+                        System.out.println("Please enter the number of years you will keep your money in your savings account:");
+                        int years = sc.nextInt();
+                        double savingsInterest = compoundInterest(savingsBalance, apy, years, 4);
+                        System.out.println("Your savings account has earned $" + savingsInterest + " in interest.");
+                        balance += savingsBalance + savingsInterest;
+                    } else {
+                        System.out.println("Invalid input. Savings account not created.");
+                    }
+                } else {
+                    System.out.println("No savings account created.");
+                }
+            }
+        }
     }
 
     // Bank Account Constructor
@@ -53,6 +86,8 @@ public class BankAccount {
         this.name = name;
         this.ssn = ssn;
     }
+
+    
 
     // Bank Account Methods
 
@@ -127,17 +162,18 @@ public class BankAccount {
     // This is called a helper method / function
     public static int menu() {
         int choice;
-        Scanner input = new java.util.Scanner(System.in);
-        System.out.println("Welcome to Appas Bank");
-        System.out.println("1. Deposit");
-        System.out.println("2. Withdraw");
-        System.out.println("3. Transfer"); // HomeWork
-        System.out.println("4. Balance");
-        System.out.println("5. Compound Interest");
-        System.out.println("6. Simple Interest"); // HomeWork
-        System.out.println("0. Exit");
-        System.out.println("Please enter your choice: ");
-        choice = input.nextInt();
+        try (Scanner input = new java.util.Scanner(System.in)) {
+            System.out.println("Welcome to Appas Bank");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Transfer"); // HomeWork
+            System.out.println("4. Balance");
+            System.out.println("5. Compound Interest");
+            System.out.println("6. Simple Interest"); // HomeWork
+            System.out.println("0. Exit");
+            System.out.println("Please enter your choice: ");
+            choice = input.nextInt();
+        }
         return choice;
     }
 
@@ -151,33 +187,32 @@ public class BankAccount {
     public static void interact(BankAccount account) {
         // get the choice from the menu method
         int choice = menu();
-        // create a scanner object
-        Scanner input = new java.util.Scanner(System.in);
-        // use that choice and run the method associated with that choice
-
-        if (choice == 1) {
-            System.out.println("Please enter the amount you would like to deposit: ");
-            double amount = input.nextDouble();
-            account.deposit(amount);
-            account.printBalance();
-        } else if (choice == 2) {
-            System.out.println("How much would you like to withdraw?");
-            double amount = input.nextDouble();
-            account.withdraw(amount);
-            account.printBalance();
-        } // place holder for choice 3
-        else if (choice == 4) {
-            account.printBalance();
-        } else if (choice == 5) {
-            System.out.println("How many years? (Whole numbers only)");
-            int years = input.nextInt();
-            account.compoundInterest(account.getbalance(), years, account.interestRate, account.period);
-            account.printBalance();
-        } // place holder for choice 6
-        else if (choice == 0) {
-            System.out.println("Thank you for banking with Appas Bank");
-        } else { // this would catch any invalid choices like
-            System.out.println("Invalid choice");
+        try (// create a scanner object
+        Scanner input = new java.util.Scanner(System.in)) {
+            if (choice == 1) {
+                System.out.println("Please enter the amount you would like to deposit: ");
+                double amount = input.nextDouble();
+                account.deposit(amount);
+                account.printBalance();
+            } else if (choice == 2) {
+                System.out.println("How much would you like to withdraw?");
+                double amount = input.nextDouble();
+                account.withdraw(amount);
+                account.printBalance();
+            } // place holder for choice 3
+            else if (choice == 4) {
+                account.printBalance();
+            } else if (choice == 5) {
+                System.out.println("How many years? (Whole numbers only)");
+                int years = input.nextInt();
+                BankAccount.compoundInterest(account.getbalance(), years, account.interestRate, account.period);
+                account.printBalance();
+            } // place holder for choice 6
+            else if (choice == 0) {
+                System.out.println("Thank you for banking with Appas Bank");
+            } else { // this would catch any invalid choices like
+                System.out.println("Invalid choice");
+            }
         }
 
     }
@@ -195,17 +230,58 @@ public class BankAccount {
 
     // P can be this.balance or getBalance() if you would like to use a getter
 
-    public void compoundInterest(double principal, int time, double rate, int annum) {
-        double amount = principal * Math.pow(1 + (rate / annum), annum * time);
+    public static double compoundInterest(double principal, double apy, double rate, int annum) {
+        double amount = principal * Math.pow(1 + (rate / annum), annum * apy);
         double roundedAmount = Math.round(amount * 100.0) / 100.0;
         double compinterest = amount - principal; // A-P
         compinterest = Math.round(compinterest * 100.0) / 100;
 
         System.out.println("Current Rate is: " + rate + "%");
         System.out.println("Current Period is: " + annum + " times per year");
-        System.out.println("Selected Time is: " + time + " years");
-        System.out.println("Compound Interest after " + time + " years is: $" + compinterest);
-        System.out.println("Total Amount after " + time + " years is: $" + roundedAmount);
+        System.out.println("Selected Time is: " + apy + " years");
+        System.out.println("Compound Interest after " + apy + " years is: $" + compinterest);
+        System.out.println("Total Amount after " + apy + " years is: $" + roundedAmount);
+        return compinterest;
     }
+    public static void overDraft(BankAccount bank, double value) {
+        double balance = bank.getbalance();
+        if (value > balance) {
+            double overdraft = value - balance;
+            System.out.println("You are about to overdraft your account by $" + overdraft);
+            System.out.println("Do you want to proceed? (y/n)");
+            try (Scanner input = new Scanner(System.in)) {
+                String answer = input.nextLine();
+                if (answer.equals("y")) {
+                    bank.withdraw(value);
+                    bank.withdraw(35);
+                    System.out.println("Overdraft fee of $35 applied.");
+                } else {
+                    System.out.println("Withdrawal canceled.");
+                }
+            }
+        } else {
+            bank.withdraw(value);
+        }
+    }
+  
+    public static void transferMoney(BankAccount from, BankAccount to, double amount) {
+        boolean canTransfer = true;
+        if (from.getbalance() < amount) {
+            System.out.println("Insufficient funds.");
+            canTransfer = false;
+        }
+        if (canTransfer) {
+            from.withdraw(amount);
+            to.deposit(amount);
+            System.out.println("$" + amount + " transferred from " + from.name + "'s account to " + to.name + "'s account.");
+        }
+    }
+    public static double simpleInterest(double principal, double rate, double time) {
+        double interest = (principal * rate * time) / 100.0;
+        return interest;
+    }
+    
+    
 
 }
+    
