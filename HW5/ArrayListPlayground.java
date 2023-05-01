@@ -64,7 +64,33 @@ public class ArrayListPlayground {
         Collections.sort(numbers);
         System.out.println(numbers);
     // d) take that ArrayList see if its size is divisable by 3 and then output the ArrayList in a matrix format
-        
+
+    while (num != 0) {
+        System.out.println("Enter a number to add to the list (0 to stop): ");
+        num = input.nextInt();
+        if (num != 0) {
+            numbers.add(num);
+        }
+    }
+    
+    // check if the ArrayList size is divisible by 3, if not, ask user for more numbers
+    while (numbers.size() % 3 != 0) {
+        System.out.println("ArrayList size is not divisible by 3. Please enter " + (3 - numbers.size() % 3) + " more number(s) to create the matrix: ");
+        num = input.nextInt();
+        numbers.add(num);
+    }
+    
+    // sort the ArrayList
+    Collections.sort(numbers);
+    
+    // print the ArrayList in matrix format
+    for (int i = 0; i < numbers.size(); i++) {
+        System.out.print(numbers.get(i) + " ");
+        if ((i + 1) % 3 == 0) {
+            System.out.println();
+        }
+    }
+
     // NOTE: make the matrix n X 3 so it can be n rows by 3 columns 
     // EX. ArrayList [1,2,3,4,5,6,7,8,9]
     // 1 2 3
