@@ -118,3 +118,119 @@ if wrong -1 from lives
 if the lives hit 0 then end the game
 if the lives are not 0 and the end of the ladder is reached then print the final 
 ladder as well as a congrats 
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+public class LadderGame {
+    
+    private int[][] ladder;
+    private ArrayList<Integer> userSelections;
+    private int lives;
+    
+    public LadderGame(int panels, int lives) {
+        this.ladder = new int[panels][2];
+        this.userSelections = new ArrayList<>();
+        this.lives = lives;
+        generateLadder();
+    }
+    
+    // Method to get total lives
+    public int getLives() {
+        return lives;
+    }
+    
+    // Method to subtract 1 from total lives
+    public void death() {
+        lives--;
+    }
+    
+    // Method to generate the ladder with random placement of tempered glass
+    private void generateLadder() {
+        Random rand = new Random();
+        for (int i = 0; i < ladder.length; i++) {
+            for (int j = 0; j < ladder[i].length; j++) {
+                ladder[i][j] = rand.nextInt(2); // 0 represents regular glass, 1 represents tempered glass
+            }
+        }
+    }
+    
+    // Method to print a ladder row
+    private void printRow(int row) {
+        System.out.print("|");
+        for (int j = 0; j < ladder[row].length; j++) {
+            if (ladder[row][j] == 0) {
+                System.out.print("0");
+            } else {
+                System.out.print("1");
+            }
+            System.out.print("|");
+        }
+    }
+    
+    // Method to print the current ladder
+    public void printCurrentLadder(int currentRow) {
+        System.out.println("Current Ladder:");
+        for (int i = 0; i < ladder.length; i++) {
+            if (i == currentRow) {
+                System.out.print(">");
+            } else {
+                System.out.print(" ");
+            }
+            printRow(i);
+            System.out.println();
+        }
+    }
+    
+    // Method to print the answer ladder
+    public void printAnswerLadder() {
+        System.out.println("Answer Ladder:");
+        for (int i = 0; i < ladder.length; i++) {
+            printRow(i);
+            System.out.println();
+        }
+    }
+    
+    // Method to print a blank ladder
+    public void printBlankLadder() {
+        System.out.println("Blank Ladder:");
+        for (int i = 0; i < ladder.length; i++) {
+            System.out.println("| |");
+        }
+    }
+    
+    // Method to get the current user selection
+    public void getUserSelection() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter R for right or L for left:");
+        String input = scanner.nextLine();
+        while (!input.equalsIgnoreCase("R") && !input.equalsIgnoreCase("L")) {
+            System.out.println("Invalid input. Please enter R or L:");
+            input = scanner.nextLine();
+        }
+        if (input.equalsIgnoreCase("R")) {
+            userSelections.add(1);
+        } else {
+            userSelections.add(0);
+        }
+    }
+    
+    // Method to play the game
+    public void play() {
+        int currentRow = 0;
+        while (currentRow < ladder.length) {
+            printCurrentLadder(currentRow);
+            getUserSelection();
+            int userSelection = userSelections.get(userSelections.size() - 1);
+            int answer = ladder[currentRow][userSelection];
+            if (answer == 0) {
+                death();
+                if (lives == 0) {
+                    System.out.println("You Lost!");
+                    System.out.println
+                }
+            }
+        }
+    }
+}

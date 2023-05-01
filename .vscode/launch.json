@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LadderGame",
+            "request": "launch",
+            "mainClass": "Project3.LadderGame",
+            "projectName": "CSCIHW-2101-S2023_b5ca19a0"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
