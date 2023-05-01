@@ -1,0 +1,63 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "HW1.Main",
+            "projectName": "CSCIHW-2101-S2023_b5ca19a0"
+        },
+        {
+            "type": "java",
+            "name": "MathGames",
+            "request": "launch",
+            "mainClass": "HW2.MathGames",
+            "projectName": "CSCIHW-2101-S2023_b5ca19a0"
+        },
+        {
+            "type": "java",
+            "name": "Loops",
+            "request": "launch",
+            "mainClass": "HW3.Loops",
+            "projectName": "CSCIHW-2101-S2023_b5ca19a0"
+        },
+        {
+            "type": "java",
+            "name": "Arrays",
+            "request": "launch",
+            "mainClass": "HW4.Arrays",
+            "projectName": "CSCIHW-2101-S2023_b5ca19a0"
+        },
+        {
+            "type": "java",
+            "name": "ArrayListPlayground",
+            "request": "launch",
+            "mainClass": "HW5.ArrayListPlayground",
+            "projectName": "CSCIHW-2101-S2023_b5ca19a0"
+        },
+        {
+            "type": "java",
+            "name": "BankAccountTester",
+            "request": "launch",
+            "mainClass": "Project1.BankAccountTester",
+            "projectName": "CSCIHW-2101-S2023_b5ca19a0"
+        },
+        {
+            "type": "java",
+            "name": "Medals",
+            "request": "launch",
+            "mainClass": "Project2.Medals",
+            "projectName": "CSCIHW-2101-S2023_b5ca19a0"
+        }
+    ]
+}

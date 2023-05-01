@@ -1,5 +1,7 @@
 package HW4;
 
+import java.util.Scanner;
+
 public class Arrays {
 
     // CONVERT THE SUMS METHOD FROM HW3 TO ADD EACH VALUE TO AN ARRAY AND THEN OUTPUT THE 
@@ -23,7 +25,37 @@ public class Arrays {
     // Total: 22
     // Array: {12,2,3,4,1,0}
     public static void Arraysums(){
+        try(Scanner scanner = new Scanner(System.in)){
+            int[] inputs = new int[10];
+            int index = 0;
+            int total = 0;
 
+            System.out.println("I will add up the numbers you give me....");
+
+            while(index < inputs.length){
+                System.out.print("Number: ");
+                int num = scanner.nextInt();
+
+                if (num == 0){
+                    break;
+                }
+
+                total += num;
+                System.out.printf("The total so far is %d.\n", total);
+
+                inputs[index] = num;
+                index++;
+            }
+            System.out.printf("Total: %d\n", total);
+            System.out.print("Array: {");
+            for (int i = 0; i < index; i++){
+                System.out.printf("%d", inputs[i]);
+                if (i != index - 1){
+                    System.out.print(",");
+                }
+            }
+            System.out.println("}");
+        }
     }
 
     // Create a method that will brute force a password EX.
@@ -40,14 +72,35 @@ public class Arrays {
     // Hint 2: using the method .toCharArray is a way to convert the password parameter to a char array as well
     // From there creating for and while loops to compare the values is trivial
 
-    public static String bruteForce(String password){
-        String answer = "";
-        char[] alphabet = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        '!', '@', '#', '$', '%', '^', '&', '*', '(', ')','<','>','/','?'};
-    
-        return answer; 
+public static void bruteForce(String password) {
+    char[] alphabet = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+            '!', '@', '#', '$', '%', '^', '&', '*', '(', ')','<','>','/','?'};
+    char[] guess = new char[password.length()]; // Initialize guess array with password length
+    for (int i = 0; i < guess.length; i++){
+        guess[i] = 'a'; // Initialize guess array with 'a'
     }
+    while (true){
+        for (int i = 0; i < guess.length; i++){
+            if (guess[i] == password.charAt(i)){
+                System.out.print(guess[i]);
+            }
+            else{
+                for (int j = 0; j < alphabet.length; j++){
+                    if (guess[i] == alphabet[j]){
+                        guess[i] = alphabet[j+1];
+                        break;
+                    }
+                }
+                System.out.print(guess[i]);
+            }
+        }
+        System.out.println();
+        if (String.valueOf(guess).equals(password)){
+            break;
+        }
+    }
+ }
 
     // Create a method that will sort an Array of integers from smallest to greatest.
     // NOTE: You CANNOT use the built in Arrays.sort method
@@ -56,19 +109,42 @@ public class Arrays {
 
     // Hint 1: a temp Array is a helpful way to store variables for comparing 
     // Hint 2: 2 nested For loops should be all thats needed for the swapping logic
-    public static int[] sorter(int[] nums){
-        int [] sortedArray = new int[nums.length];
+ 
+public static int[] sorter(int[] nums){
+        int n = nums.length;
+        int [] sortedArray = new int[n];
+        for (int i = 0; i < n; i++){
+            sortedArray[i] = nums[i];
+        }
+        for (int i = 0; i < n-1; i++){
+            for (int j = 0; j < n-i-1; j++){
+                if (sortedArray[j] > sortedArray[j+1]){
+                    int temp = sortedArray[j];
+                    sortedArray[j] = sortedArray[j+1];
+                    sortedArray[j+1] = temp;
+                }
+            }
+        }
         return sortedArray;
     }
-
-
 
 
     public static void main(String[] args) {
         // Tester main method for your methods
         System.out.println("Hello World!");
-
+        Arraysums();
+        String password = "AAAA";
+        bruteForce(password);
+        int[] nums = {9,10,2,5,3,4,7,8};
+        int[] sortedArray = sorter(nums);
+        System.out.print("[");
+        for (int i = 0; i < sortedArray.length; i++){
+            if (i != sortedArray.length - 1){
+                System.out.printf("%d,", sortedArray[i]);
+            }
+            else{
+                System.out.printf("%d", sortedArray[i]);
+            }
+        }
     }
-
-    
 }
