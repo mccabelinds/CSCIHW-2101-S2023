@@ -133,7 +133,7 @@ public static int[] sorter(int[] nums){
         // Tester main method for your methods
         System.out.println("Hello World!");
         Arraysums();
-        String password = "AAAA";
+        String password = "ZZZZ";
         bruteForce(password);
         int[] nums = {9,10,2,5,3,4,7,8};
         int[] sortedArray = sorter(nums);
